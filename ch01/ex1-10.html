@@ -1,0 +1,41 @@
+<!-- Computed values -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ cost }}
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+      const app = new Vue({
+	el: '#app',
+	data: {
+	  price: 25,
+	  currency: '$',
+	  salesTax: 16
+	},
+	computed: {
+	  cost() {
+	    // Work out the price of the item including salesTax
+	    let itemCost = parseFloat(
+	      Math.round((this.salesTax / 100) *
+		this.price) + this.price).toFixed(2);
+	    // Add text before displaying the currency and amount
+	    let output = 'This item costs ' +
+			 this.currency + itemCost;
+	    // Append to the output variable the price without salesTax
+	    output += ' (' + this.currency + this.price +
+		      ' excluding salesTax)';
+	    // Return the output value
+	    return output;
+	  }
+	}
+      });
+    </script>
+  </body>
+</html>

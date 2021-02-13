@@ -1,0 +1,36 @@
+<!-- Methods and reusable functions -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ calculateSalesTax(shirtPrice) }}
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+      const app = new Vue({
+	el: '#app',
+	
+	data: {
+	  shirtPrice: 25,
+	  hatPrice: 10,
+	  
+	  currency: '$',
+	  salesTax: 16
+	},
+	methods: {
+	  calculateSalesTax(price) {
+	    // Work out the price of the item including sales tax
+	    return parseFloat(
+	      Math.round((this.salesTax / 100) * price)
+	      + price).toFixed(2);
+	  }
+	}
+      });
+    </script>
+  </body>
+</html>
