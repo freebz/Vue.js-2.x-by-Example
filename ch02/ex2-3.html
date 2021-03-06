@@ -1,0 +1,25 @@
+<!-- Conditional rendering -->
+<!-- v-if -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="isVisible">Now you see me</div>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+      const app = new Vue({
+	el: '#app',
+	
+	data: {
+	  isVisible: false
+	}
+      });
+    </script>
+  </body>
+</html>
