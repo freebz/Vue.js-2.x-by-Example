@@ -1,0 +1,29 @@
+<!-- Passing data to your component - props -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+  </head>
+  <body>
+    <div id="app">
+      <heading text="Hello!"></heading>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+      Vue.component('heading', {
+	template: '<h1>{{ text }}</h1>',
+
+	props: ['text']
+      });
+      
+      const app = new Vue({
+	el: '#app',
+	
+        // App options
+
+      });
+    </script>
+  </body>
+</html>

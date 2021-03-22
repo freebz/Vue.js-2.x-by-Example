@@ -1,0 +1,99 @@
+<!-- Creating a repeatable component -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+  </head>
+  <body>
+    <div id="app">
+      <table>
+	<template v-for="individual in people">
+	  <team-member v-bind:person="individual"></team-member>
+	</template>
+      </table>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/x-template" id="team-member-template">
+      <tr v-show="filterRow(person)">
+        <td>
+          {{ person.name }}
+        </td>
+        <td>
+          <a v-bind:href="'mailto:' + person.email">{{
+    	    person.email }}</a>
+        </td>
+        <td v-bind:class="balanceClass(person)">
+          {{ format(person, 'balance') }}
+        </td>
+        <td v-bind:class="activeClass(person)">
+          {{ format(person, 'isActive') }}
+        </td>
+      </tr>
+    </script>
+    <script type="text/javascript">
+      Vue.component('team-member', {
+	template: '#team-member-template',
+	props: {
+	  person: Object
+	},
+	methods: {
+	  activeClass(person) {
+	    return person.isActive ? 'active' : 'inactive';
+	  },
+
+	  balanceClass(person) {
+	    let balanceLevel = 'success';
+	    
+	    if (person.balance < 2000) {
+	      balanceLevel = 'error';
+	    } else if (person.balance < 3000) {
+	      balanceLevel = 'warning';
+	    }
+
+	    let increasing = false,
+		balance = person.balance / 1000;
+
+	    if (Math.round(balance) == Math.ceil(balance)) {
+	      increasing = 'increasing';
+	    }
+	    
+	    return [balanceLevel, increasing];
+	  },
+
+	  format(person, key) {
+	    let field = person[key],
+		output = field.toString().trim();
+
+	    switch(key) {
+	      case 'balance':
+		output = this.currency + field.toFixed(2);
+		break;
+	      case 'registered':
+	      case 'deactivated':
+		let registered = new Date(field);
+		output = registered.toLocaleString('en-US');
+		break;
+	    }
+	    
+	    return output;
+	  },
+	  
+	  filterRow(person) {
+	    return true;
+	  },
+	}
+      });
+      
+      const app = new Vue({
+	el: '#app',
+	
+	data: {
+	  people: [{"index":0,"guid":"49c9d9f7-af12-4ded-9357-44993eea0f7a","isActive":true,"balance":2570.32,"name":"Morales Ochoa","email":"moralesochoa@savvy.com","registered":"2016-02-22T10:11:31","friends":[{"id":3}]},{"index":1,"guid":"530855cb-63f8-4272-929d-cf544b1a056d","isActive":true,"balance":1892.1,"name":"Tyson Beard","email":"tysonbeard@savvy.com","registered":"2016-01-27T01:06:57","friends":[{"id":1}]},{"index":2,"guid":"88f9b85b-c4b4-4a0c-813c-54e027fff67f","isActive":false,"balance":3423.69,"name":"Hawkins Gibbs","email":"hawkinsgibbs@savvy.com","registered":"2016-04-23T11:19:49","friends":[{"id":3}]},{"index":3,"guid":"35050ff6-51b7-48a4-951b-74f8f115cfcb","isActive":true,"balance":3277.41,"name":"Conley Boyle","email":"conleyboyle@savvy.com","registered":"2014-06-04T04:22:31","friends":[{"id":1}]},{"index":4,"guid":"f2c7f2f2-719b-4f8a-be5f-4e66538fbd2d","isActive":true,"balance":2180.15,"name":"Joy Mosley","email":"joymosley@savvy.com","registered":"2016-04-21T11:52:18","friends":[{"id":1}]}],
+	},
+
+      });
+    </script>
+  </body>
+</html>

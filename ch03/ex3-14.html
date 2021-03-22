@@ -1,0 +1,32 @@
+<!-- Using your component -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+  </head>
+  <body>
+    <div id="app">
+      <ol>
+	<li is="my-component"></li>
+      </ol>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+      let Child = {
+	template: '<div>hello</div>'
+      }
+      
+      const app = new Vue({
+	el: '#app',
+	
+        // App options
+	
+        components: {
+          'my-component': Child
+        }
+      });
+    </script>
+  </body>
+</html>

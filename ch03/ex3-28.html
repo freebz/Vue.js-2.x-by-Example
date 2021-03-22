@@ -1,0 +1,74 @@
+<!-- Passing data to your component - slots -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+  </head>
+  <body>
+    <div id="app">
+      <modal-window :visible="true">
+	<h1 slot="header">Modal Title</h1>
+
+	<p>Lorem ipsum dolor sit amet, consectetur
+	  adipiscing elit. Suspendisse ut rutrum ante, a
+	  ultrices felis. Quisque sodales diam non mi
+	  blandit dapibus. </p>
+	
+	<p slot="footer">Lorem ipsum dolor sit amet, consectetur
+	  adipiscing elit. Suspendisse ut rutrum ante, a
+	  ultrices felis. Quisque sodales diam non mi
+	  blandit dapibus. </p>
+
+	<div slot="buttons">
+	  <button type="button" class="btn btn-primary">Ok</button>
+	</div>
+      </modal-window>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+      Vue.component('modal-window', {
+	template: `<div class="modal fade" v-show="visible">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <slot name="header"></slot>
+                <button type="button" class="close"
+                  data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <slot></slot>
+              </div>
+              <div class="modal-footer">
+                <slot name="footer"></slot>
+                <slot name="buttons">
+                  <button type="button" class="btn btn-primary">
+                    Save changes</button>
+                  <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">Close</button>
+                </slot>
+              </div>
+            </div>
+          </div>
+        </div>`,
+
+	props: {
+	  visible: {
+	    type: Boolean,
+	    default: false
+	  }
+	}
+      });
+      
+      const app = new Vue({
+	el: '#app',
+	
+        // App options
+
+      });
+    </script>
+  </body>
+</html>
