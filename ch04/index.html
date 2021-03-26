@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dropbox App</title>
+    <style>
+      .fade-enter-active,
+      .fade-leave-active {
+	transition: opacity .5s
+      }
+      .fade-enter,
+      .fade-leave-to {
+	opacity: 0
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <dropbox-viewer></dropbox-viewer>
+    </div>
+    <script type="text/x-template" id="dropbox-viewer-template">
+      <div>
+        <h1>Dropbox</h1>
+        <transition name="fade">
+          <div v-if="isLoading">Loading...</div>
+        </transition>
+        <transition name="fade">
+          <ul v-if="!isLoading">
+            <li v-for="entry in structure">
+              <strong>{{ entry.name }}</strong>
+              <span v-if="entry.size"> - {{ bytesToSize(entry.size) }}</span>
+              <span v-if="entry.media_info">
+              [
+      		{{ entry.media_info.metadata.dimensions.width }}px x
+		{{ entry.media_info.metadata.dimensions.height }}pz
+	      ]
+              </span>
+            </li>
+          </ul>
+        </transition>
+      </div>
+    </script>
+    <script src="js/vue.js"></script>
+    <script src="js/dropbox.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
