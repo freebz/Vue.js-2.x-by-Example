@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+	<div>LOGO</div>
+	<nav>
+	  <ul>
+	    <li>
+	      <router-link to="/">Home</router-link>
+	    </li>
+	    <li>
+	      <router-link to="/about">About</router-link>
+	    </li>
+	    <li>
+	      <router-link :to="{name: 'food'}">Food</router-link>
+	    </li>
+	    <li>
+	      <router-link :to="{name: 'user', params: { name: 'sarah', emotion: 'happy' }}">
+		Sarah is Happy
+	      </router-link>
+	    </li>
+	  </ul>
+	</nav>
+      </header>
+
+      <main>
+	<router-view></router-view>
+      </main>
+
+      <aside>
+	<router-view name="sidebar"></router-view>
+      </aside>
+
+      <footer>
+	<small>&copy; Myself</small>
+      </footer>
+    </div>
+
+    <script type="text/x-template" id="homepage">
+      <div>
+	<h1>Hello &amp; Welcome</h1>
+	<p>Welcome to my website. Feel free to browse around.</p>
+      </div>
+    </script>
+
+    <script type="text/x-template" id="about">
+      <div>
+	<h1>About Me</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed metus
+magna. Vivamus eget est nisi. Phasellus vitae nisi sagittis, ornare dui quis, pharetra
+leo. Nullam eget tel velit. Sed tempor lorem augue, vitae luctus urna ultricies
+nec. Curabitur luctus sapien elit, non pretium ante sagittis blandit. Nulla egestas
+nunc sit amet tellus rhoncus, a ultrices nisl varius. Nam scelerisque lacus id justo
+congue maximus. Etiam rhoncus, libero at facilisis gravida, nibh nisi venenatis ante,
+sit amet viverra justo urna vel neque.</p>
+
+        <router-view></router-view>
+      
+	<p>Curabitur et arcu fermentum, viverra lorem ut, pulvinar arcu. Fusce ex massa,
+vehicula id eros vel, feugiat commodo leo. Etiam in sem rutrum, porttitor velit in,
+sollicitudin tortor. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+Donec ac sapien efficitur, pretium massa at, vehicula ligula. Vestibulum turpis quam,
+feugiat sed orci id, eleifend pretium urna. Nullam faucibus arcu eget odio venenatis
+ornare.</p>
+      </div>
+    </script>
+    
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/router.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
+</html>
