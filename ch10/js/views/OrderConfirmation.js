@@ -1,0 +1,3 @@
+const OrderConfirmation = {
+  name: 'OrderConfirmation'
+};
